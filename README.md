@@ -1,56 +1,57 @@
-# Welcome to your Expo app 👋
+```markdown
+# FitFlow
+Simple fitness tracking mobile app built with React Native and Expo.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Tech Stack
+* Expo (SDK 52+)
+* Expo Router (`app/` directory)
+* NativeWind / Tailwind CSS
+* Expo Vector Icons (Feather)
+* TypeScript
 
-## Get started
+## Current Progress / Setup Notes
+* Initialized project with Expo Router and TypeScript.
+* Configured NativeWind v4 with Metro (`metro.config.js` and `tailwind.config.js`).
+* Fixed icon loading issue with `@expo/vector-icons`.
+* Setup global styles via `global.css` inside root layout (`_layout.tsx`).
+* Created initial login screen UI (`app/index.tsx`).
 
-1. Install dependencies
+## Development History / What We Did
+* **Project Generation:** Initialized the project (`npx create-expo-app fitflow`) and opted for local development (`npx expo start`) instead of cloud EAS builds to bypass Apple 2FA roadblocks.
+* **UI Implementation:** Coded the initial Login screen in `src/app/index.tsx` based on the provided UI design, utilizing React Native components and state (`useState`).
+* **Tailwind & NativeWind Setup:** Installed `nativewind` and `tailwindcss`, then generated and configured `tailwind.config.js` and `babel.config.js`.
+* **Directory Troubleshooting:** Relocated `babel.config.js` out of the `scripts` folder into the project root so Expo could correctly parse it.
+* **Routing Cleanup:** Stripped out the default Expo tabs template by deleting `explore.tsx` and updating `src/app/_layout.tsx` to render a clean `<Stack screenOptions={{ headerShown: false }} />`.
+* **CSS & Metro Config:** Created `global.css` using standard `@import` Tailwind directives to clear IDE warnings, and set up `metro.config.js` to process NativeWind v4 styles.
+* **Preset Fix:** Added `require("nativewind/preset")` to the `presets` array in `tailwind.config.js` to resolve a NativeWind preset crash upon server startup.
+* **Cache Clearing:** Utilized `npx expo start -c` to aggressively clear the Metro bundler cache, successfully pushing the fully styled UI to the Expo Go app.
 
-   ```bash
-   npm install
-   ```
+## Getting Started
+Make sure you have Node.js installed.
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+Clone repo:
 ```bash
-npm run reset-project
+git clone [https://github.com/your-username/fitflow.git](https://github.com/your-username/fitflow.git)
+cd fitflow
+
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Install packages:
 
-### Other setup steps
+```bash
+npm install
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```
 
-## Learn more
+Start the dev server:
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+npx expo start
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```
 
-## Join the community
+Press `a` for Android emulator, `i` for iOS simulator, or scan the QR code with Expo Go.
 
-Join our community of developers creating universal apps.
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
