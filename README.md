@@ -3,11 +3,11 @@ Simple fitness tracking mobile app built with React Native and Expo.
 
 ## Preview
 <p align="center">
-  <img src="<img width="665" height="1378" alt="Screenshot 2026-09-29 192917" src="https://github.com/user-attachments/assets/d0e43166-4edb-4249-b390-2664dbc06b76" />
+  <img src="https://github.com/user-attachments/assets/d0e43166-4edb-4249-b390-2664dbc06b76" alt="FitFlow Login Preview" width="320" />
 </p>
 
 ## Tech Stack
-* Expo (SDK 52+)
+* Expo (SDK 57)
 * Expo Router (`app/` directory)
 * NativeWind / Tailwind CSS
 * Expo Vector Icons (Feather)
@@ -35,5 +35,6 @@ Make sure you have Node.js installed.
 
 Clone repo:
 ```bash
-git clone [https://github.com/your-username/fitflow.git](https://github.com/your-username/fitflow.git)
-cd fitflow![Uploading Screenshot 2026-09-29 192917.png…]()
+git clone https://github.com/ADZaheer/FitFlow.git
+cd fitflow
+```
