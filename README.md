@@ -1,4 +1,3 @@
-```markdown
 # FitFlow
 Simple fitness tracking mobile app built with React Native and Expo.
 
@@ -33,25 +32,3 @@ Clone repo:
 ```bash
 git clone [https://github.com/your-username/fitflow.git](https://github.com/your-username/fitflow.git)
 cd fitflow
-
-```
-
-Install packages:
-
-```bash
-npm install
-
-```
-
-Start the dev server:
-
-```bash
-npx expo start
-
-```
-
-Press `a` for Android emulator, `i` for iOS simulator, or scan the QR code with Expo Go.
-
-```
-
-```
