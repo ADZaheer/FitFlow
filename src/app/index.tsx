@@ -1,4 +1,5 @@
 import { Feather } from '@expo/vector-icons';
+import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
@@ -17,6 +18,7 @@ export default function Index() {
 
   const Login = () => {
     console.log('Login data:', { email, password });
+    router.push('/home' as any);
   };
 
   const TogglePassword = () => {
