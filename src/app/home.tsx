@@ -108,9 +108,12 @@ export default function Home() {
             <View className="bg-white px-3 py-1.5 rounded-full shadow-sm border border-slate-100">
               <Text className="text-slate-500 font-bold text-xs">ID</Text>
             </View>
-            <View className="bg-slate-200 w-9 h-9 rounded-full items-center justify-center">
+            <TouchableOpacity
+              onPress={() => router.push('/profile' as any)}
+              className="bg-slate-200 w-9 h-9 rounded-full items-center justify-center"
+            >
               <Feather name="user" size={18} color="#64748b" />
-            </View>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -331,7 +334,7 @@ export default function Home() {
 
         {/* Tab Profil */}
         <TouchableOpacity
-          onPress={() => setActiveTab('Profil')}
+          onPress={() => router.push('/profile' as any)}
           className="items-center justify-center gap-1"
         >
           <Feather

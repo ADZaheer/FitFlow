@@ -20,29 +20,29 @@ export default function Index() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleAuth = () => {
-    // validasi simpel
+    // jika di mode register, cek nama
     if (isRegister && !name.trim()) {
-      Alert.alert('Perhatian', 'Nama lengkap wajib diisi ya');
+      alert('Perhatian: Nama lengkap wajib diisi');
       return;
     }
 
     if (!email.trim()) {
-      Alert.alert('Perhatian', 'Email / Username tidak boleh kosong');
+      alert('Perhatian: Email / Username tidak boleh kosong');
       return;
     }
 
     if (!password) {
-      Alert.alert('Perhatian', 'Kata sandi wajib diisi');
+      alert('Perhatian: Kata sandi wajib diisi');
       return;
     }
 
     if (password.length < 6) {
-      Alert.alert('Perhatian', 'Kata sandi minimal 6 karakter');
+      alert('Perhatian: Kata sandi minimal 6 karakter');
       return;
     }
 
-    console.log(isRegister ? 'Register data:' : 'Login data:', { name, email, password });
-    router.push('/home' as any);
+    // langsung pindah ke halaman utama
+    router.replace('/home' as any);
   };
 
   const TogglePassword = () => {
