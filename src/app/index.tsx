@@ -3,6 +3,7 @@ import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   Text,
@@ -12,12 +13,35 @@ import {
 } from 'react-native';
 
 export default function Index() {
+  const [isRegister, setIsRegister] = useState(false);
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
-  const Login = () => {
-    console.log('Login data:', { email, password });
+  const handleAuth = () => {
+    // validasi simpel
+    if (isRegister && !name.trim()) {
+      Alert.alert('Perhatian', 'Nama lengkap wajib diisi ya');
+      return;
+    }
+
+    if (!email.trim()) {
+      Alert.alert('Perhatian', 'Email / Username tidak boleh kosong');
+      return;
+    }
+
+    if (!password) {
+      Alert.alert('Perhatian', 'Kata sandi wajib diisi');
+      return;
+    }
+
+    if (password.length < 6) {
+      Alert.alert('Perhatian', 'Kata sandi minimal 6 karakter');
+      return;
+    }
+
+    console.log(isRegister ? 'Register data:' : 'Login data:', { name, email, password });
     router.push('/home' as any);
   };
 
@@ -51,46 +75,80 @@ export default function Index() {
           {/* LoGo */}
           <View className="bg-orange-100 self-start px-4 py-1.5 rounded-full mb-4">
             <Text className="text-orange-500 font-bold text-xs uppercase">
-              Mulai Bergerak
+              {isRegister ? 'Mulai Bergabung' : 'Mulai Bergerak'}
             </Text>
           </View>
 
           {/* TITLWESS */}
           <Text className="text-4xl font-extrabold text-slate-900 mb-1">
-            Selamat Datang
+            {isRegister ? 'Buat Akun' : 'Selamat Datang'}
           </Text>
           <Text className="text-4xl font-extrabold text-orange-500 mb-4">
-            Kembali!
+            {isRegister ? 'Baru!' : 'Kembali!'}
           </Text>
-          <Text className="text-slate-500 text-base leading-6 mb-8 pr-4">
-            Lanjutkan progres olahragamu dan capai target tubuh bugar hari ini.
+          <Text className="text-slate-500 text-base leading-6 mb-6 pr-4">
+            {isRegister
+              ? 'Daftar sekarang untuk mulai mencatat target latihan dan hidup lebih sehat.'
+              : 'Lanjutkan progres olahragamu dan capai target tubuh bugar hari ini.'}
           </Text>
 
-          {/* tutorial ahh info */}
-          <View className="bg-slate-100 rounded-2xl p-4 flex-row items-center mb-8 gap-4">
-            <View className="bg-blue-500 w-12 h-12 rounded-xl items-center justify-center">
-              <Feather name="target" size={24} color="white" />
-            </View>
-            <View className="flex-1">
-              <Text className="font-bold text-slate-900 mb-1">
-                Siap melampaui target?
+          {/* Tab switch Login / Register */}
+          <View className="flex-row bg-slate-200/70 p-1 rounded-2xl mb-6">
+            <TouchableOpacity
+              onPress={() => setIsRegister(false)}
+              className={`flex-1 py-2.5 rounded-xl items-center ${!isRegister ? 'bg-white shadow-sm' : ''
+                }`}
+            >
+              <Text
+                className={`font-bold text-sm ${!isRegister ? 'text-slate-900' : 'text-slate-500'
+                  }`}
+              >
+                Masuk
               </Text>
-              <Text className="text-slate-500 text-xs">
-                15,480+ pengguna aktif berolahraga sekarang
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setIsRegister(true)}
+              className={`flex-1 py-2.5 rounded-xl items-center ${isRegister ? 'bg-white shadow-sm' : ''
+                }`}
+            >
+              <Text
+                className={`font-bold text-sm ${isRegister ? 'text-slate-900' : 'text-slate-500'
+                  }`}
+              >
+                Daftar
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
+
+          {/* Formm naruh nama kalau register */}
+          {isRegister && (
+            <View className="mb-5">
+              <Text className="text-slate-900 font-bold mb-2 text-xs uppercase">
+                Nama Lengkap
+              </Text>
+              <View className="flex-row items-center bg-white border border-slate-200 rounded-2xl px-4 py-3 h-14">
+                <Feather name="smile" size={20} color="#94a3b8" />
+                <TextInput
+                  className="flex-1 text-slate-900 text-base ml-3"
+                  placeholder="Nama lengkap kamu"
+                  placeholderTextColor="#94a3b8"
+                  value={name}
+                  onChangeText={setName}
+                />
+              </View>
+            </View>
+          )}
 
           {/* Formm naruh email and pass */}
           <View className="mb-5">
             <Text className="text-slate-900 font-bold mb-2 text-xs uppercase">
-              Nama Pengguna
+              {isRegister ? 'Email' : 'Nama Pengguna / Email'}
             </Text>
             <View className="flex-row items-center bg-white border border-slate-200 rounded-2xl px-4 py-3 h-14">
               <Feather name="user" size={20} color="#94a3b8" />
               <TextInput
                 className="flex-1 text-slate-900 text-base ml-3"
-                placeholder="nama_kamu atau email"
+                placeholder={isRegister ? 'contoh@email.com' : 'nama_kamu atau email'}
                 placeholderTextColor="#94a3b8"
                 value={email}
                 onChangeText={setEmail}
@@ -99,22 +157,24 @@ export default function Index() {
             </View>
           </View>
 
-          <View className="mb-10">
+          <View className="mb-8">
             <View className="flex-row justify-between mb-2">
               <Text className="text-slate-900 font-bold text-xs uppercase">
                 Kata Sandi
               </Text>
-              <TouchableOpacity>
-                <Text className="text-orange-500 font-bold text-xs">
-                  Lupa Password?
-                </Text>
-              </TouchableOpacity>
+              {!isRegister && (
+                <TouchableOpacity>
+                  <Text className="text-orange-500 font-bold text-xs">
+                    Lupa Password?
+                  </Text>
+                </TouchableOpacity>
+              )}
             </View>
             <View className="flex-row items-center bg-white border border-slate-200 rounded-2xl px-4 py-3 h-14">
               <Feather name="lock" size={20} color="#94a3b8" />
               <TextInput
                 className="flex-1 text-slate-900 text-base ml-3"
-                placeholder="Minimal 8 karakter"
+                placeholder="Minimal 6 karakter"
                 placeholderTextColor="#94a3b8"
                 secureTextEntry={!showPassword}
                 value={password}
@@ -132,12 +192,26 @@ export default function Index() {
 
           {/* Submittt */}
           <TouchableOpacity
-            onPress={Login}
+            onPress={handleAuth}
             className="bg-orange-500 rounded-2xl h-14 flex-row items-center justify-center gap-2 shadow-md shadow-orange-200"
           >
-            <Text className="text-white font-bold text-lg">Masuk Sekarang</Text>
+            <Text className="text-white font-bold text-lg">
+              {isRegister ? 'Daftar Sekarang' : 'Masuk Sekarang'}
+            </Text>
             <Feather name="arrow-right" size={20} color="white" />
           </TouchableOpacity>
+
+          {/* text link bawah */}
+          <View className="flex-row justify-center items-center mt-6">
+            <Text className="text-slate-500 text-sm">
+              {isRegister ? 'Sudah punya akun? ' : 'Belum punya akun? '}
+            </Text>
+            <TouchableOpacity onPress={() => setIsRegister(!isRegister)}>
+              <Text className="text-orange-500 font-bold text-sm">
+                {isRegister ? 'Masuk di sini' : 'Daftar gratis'}
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
