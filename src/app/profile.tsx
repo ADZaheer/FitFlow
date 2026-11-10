@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import Header from '../components/Header';
 
 export default function Profile() {
   const [notifAktif, setNotifAktif] = useState(true);
@@ -31,19 +32,8 @@ export default function Profile() {
     <SafeAreaView className="flex-1 bg-slate-50">
       <StatusBar style="dark" />
 
-      {/* Header atas */}
-      <View className="px-6 pt-4 pb-3 flex-row justify-between items-center bg-white border-b border-slate-100">
-        <TouchableOpacity
-          onPress={() => router.back()}
-          className="w-10 h-10 rounded-full bg-slate-100 items-center justify-center"
-        >
-          <Feather name="arrow-left" size={20} color="#334155" />
-        </TouchableOpacity>
-        <Text className="text-base font-bold text-slate-800">Profil Saya</Text>
-        <TouchableOpacity className="w-10 h-10 rounded-full bg-slate-100 items-center justify-center">
-          <Feather name="edit-2" size={17} color="#64748b" />
-        </TouchableOpacity>
-      </View>
+      {/* Header atas Reusable */}
+      <Header title="Profil Saya" rightIcon="edit-2" />
 
       <ScrollView contentContainerStyle={{ paddingBottom: 60 }} className="flex-1 px-6 pt-6">
         {/* Foto & Info Utama */}

@@ -9,62 +9,12 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import WorkoutCard from '../components/WorkoutCard';
+import { workoutList } from '../data/workouts';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('Beranda');
   const [waterCount, setWaterCount] = useState(6);
-
-  // data list latihan statis
-  const workoutList = [
-    {
-      id: '1',
-      title: 'Full Body HIIT',
-      category: 'Menengah',
-      duration: '25 Menit',
-      calories: '320 kcal',
-      icon: 'zap',
-      bgColor: 'bg-orange-100',
-      iconColor: '#f97316',
-      badgeColor: 'text-orange-500',
-      desc: 'Latihan intensitas tinggi untuk membakar lemak seluruh tubuh dan meningkatkan stamina.',
-    },
-    {
-      id: '2',
-      title: 'Core & Abs Burn',
-      category: 'Pemula',
-      duration: '15 Menit',
-      calories: '180 kcal',
-      icon: 'target',
-      bgColor: 'bg-blue-100',
-      iconColor: '#3b82f6',
-      badgeColor: 'text-blue-500',
-      desc: 'Fokus melatih otot perut dan kekuatan inti tubuh dengan gerakan terukur.',
-    },
-    {
-      id: '3',
-      title: 'Morning Yoga Flow',
-      category: 'Relaksasi',
-      duration: '20 Menit',
-      calories: '120 kcal',
-      icon: 'sun',
-      bgColor: 'bg-emerald-100',
-      iconColor: '#10b981',
-      badgeColor: 'text-emerald-500',
-      desc: 'Peregangan tubuh di pagi hari untuk meningkatkan fleksibilitas dan ketenangan.',
-    },
-    {
-      id: '4',
-      title: 'Outdoor Cycling',
-      category: 'Kardio',
-      duration: '40 Menit',
-      calories: '450 kcal',
-      icon: 'activity',
-      bgColor: 'bg-purple-100',
-      iconColor: '#8b5cf6',
-      badgeColor: 'text-purple-500',
-      desc: 'Latihan kayuhan sepeda santai hingga cepat untuk memperkuat daya tahan jantung.',
-    },
-  ];
 
   const tambahAir = () => {
     if (waterCount < 8) {
@@ -250,26 +200,11 @@ export default function Home() {
 
         {/* item list memuat ikon, judul, dan dapat dinavigasikan */}
         {workoutList.map((item) => (
-          <TouchableOpacity
+          <WorkoutCard
             key={item.id}
+            item={item}
             onPress={() => bukaDetail(item)}
-            className="bg-white rounded-2xl p-4 flex-row items-center justify-between border border-slate-100 shadow-sm mb-3"
-          >
-            <View className="flex-row items-center gap-3.5 flex-1 pr-2">
-              <View className={`${item.bgColor} w-12 h-12 rounded-2xl items-center justify-center`}>
-                <Feather name={item.icon as any} size={22} color={item.iconColor} />
-              </View>
-              <View className="flex-1">
-                <Text className="font-bold text-slate-900 text-sm mb-0.5">{item.title}</Text>
-                <Text className="text-xs text-slate-400">
-                  {item.duration} • <Text className={`font-semibold ${item.badgeColor}`}>{item.category}</Text> • {item.calories}
-                </Text>
-              </View>
-            </View>
-            <View className="w-8 h-8 rounded-full bg-slate-50 items-center justify-center">
-              <Feather name="chevron-right" size={18} color="#94a3b8" />
-            </View>
-          </TouchableOpacity>
+          />
         ))}
       </ScrollView>
 

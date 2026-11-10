@@ -1,5 +1,5 @@
 import { Feather, Ionicons } from '@expo/vector-icons';
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {
@@ -7,9 +7,11 @@ import {
   SafeAreaView,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
+import Header from '../components/Header';
+import PrimaryButton from '../components/PrimaryButton';
+import { defaultGerakan } from '../data/workouts';
 
 export default function Detail() {
   const params = useLocalSearchParams();
@@ -25,15 +27,6 @@ export default function Detail() {
     'Latihan intensitas tinggi untuk membakar lemak seluruh tubuh dan meningkatkan stamina.';
   const iconName = (params.icon as any) || 'zap';
 
-  // step gerakan latihan (mock data)
-  const gerakanList = [
-    { no: '01', name: 'Jumping Jacks', time: '45 Detik', reps: '3 Set' },
-    { no: '02', name: 'Bodyweight Squats', time: '60 Detik', reps: '3 Set' },
-    { no: '03', name: 'Mountain Climbers', time: '45 Detik', reps: '3 Set' },
-    { no: '04', name: 'High Knees', time: '30 Detik', reps: '3 Set' },
-    { no: '05', name: 'Plank Hold', time: '60 Detik', reps: '2 Set' },
-  ];
-
   const handleStart = () => {
     setIsStarted(true);
     Alert.alert('Latihan Dimulai! 🔥', `Selamat berolahraga untuk sesi ${title}. Jangan lupa siapkan air minum.`);
@@ -43,19 +36,8 @@ export default function Detail() {
     <SafeAreaView className="flex-1 bg-slate-50">
       <StatusBar style="dark" />
 
-      {/* Bagian Header */}
-      <View className="px-6 pt-4 pb-3 flex-row justify-between items-center bg-white border-b border-slate-100">
-        <TouchableOpacity
-          onPress={() => router.back()}
-          className="w-10 h-10 rounded-full bg-slate-100 items-center justify-center"
-        >
-          <Feather name="arrow-left" size={20} color="#334155" />
-        </TouchableOpacity>
-        <Text className="text-base font-bold text-slate-800">Detail Latihan</Text>
-        <TouchableOpacity className="w-10 h-10 rounded-full bg-slate-100 items-center justify-center">
-          <Feather name="bookmark" size={18} color="#64748b" />
-        </TouchableOpacity>
-      </View>
+      {/* Bagian Header Reusable */}
+      <Header title="Detail Latihan" rightIcon="bookmark" />
 
       <ScrollView contentContainerStyle={{ paddingBottom: 110 }} className="flex-1 px-6 pt-5">
         {/* Banner Kartu Latihan */}
@@ -99,10 +81,10 @@ export default function Detail() {
         <View className="mb-6">
           <View className="flex-row justify-between items-center mb-3">
             <Text className="text-base font-bold text-slate-900">Rangkaian Gerakan</Text>
-            <Text className="text-xs text-slate-400">{gerakanList.length} Gerakan</Text>
+            <Text className="text-xs text-slate-400">{defaultGerakan.length} Gerakan</Text>
           </View>
 
-          {gerakanList.map((item, index) => (
+          {defaultGerakan.map((item, index) => (
             <View
               key={index}
               className="bg-white rounded-2xl p-4 flex-row items-center justify-between border border-slate-100 shadow-sm mb-3"
@@ -126,19 +108,14 @@ export default function Detail() {
         </View>
       </ScrollView>
 
-      {/* Tombol Mulai di Bawah */}
+      {/* Tombol Mulai di Bawah Reusable */}
       <View className="absolute bottom-0 left-0 right-0 bg-white border-t border-slate-100 p-6 shadow-lg">
-        <TouchableOpacity
+        <PrimaryButton
+          title={isStarted ? 'Latihan Sedang Berjalan' : 'Mulai Latihan Sekarang'}
           onPress={handleStart}
-          className={`${
-            isStarted ? 'bg-emerald-500' : 'bg-orange-500'
-          } rounded-2xl h-14 flex-row items-center justify-center gap-2 shadow-md shadow-orange-200`}
-        >
-          <Feather name={isStarted ? 'check-circle' : 'play'} size={20} color="white" />
-          <Text className="text-white font-bold text-base">
-            {isStarted ? 'Latihan Sedang Berjalan' : 'Mulai Latihan Sekarang'}
-          </Text>
-        </TouchableOpacity>
+          iconName={isStarted ? 'check-circle' : 'play'}
+          variant={isStarted ? 'green' : 'orange'}
+        />
       </View>
     </SafeAreaView>
   );

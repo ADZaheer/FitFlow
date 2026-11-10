@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import PrimaryButton from '../components/PrimaryButton';
 
 export default function Index() {
   const [isRegister, setIsRegister] = useState(false);
@@ -191,15 +192,11 @@ export default function Index() {
           </View>
 
           {/* Submittt */}
-          <TouchableOpacity
+          <PrimaryButton
+            title={isRegister ? 'Daftar Sekarang' : 'Masuk Sekarang'}
             onPress={handleAuth}
-            className="bg-orange-500 rounded-2xl h-14 flex-row items-center justify-center gap-2 shadow-md shadow-orange-200"
-          >
-            <Text className="text-white font-bold text-lg">
-              {isRegister ? 'Daftar Sekarang' : 'Masuk Sekarang'}
-            </Text>
-            <Feather name="arrow-right" size={20} color="white" />
-          </TouchableOpacity>
+            iconName="arrow-right"
+          />
 
           {/* text link bawah */}
           <View className="flex-row justify-center items-center mt-6">
