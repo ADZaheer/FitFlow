@@ -231,7 +231,7 @@ export default function Home() {
 
         {/* Tab Eksplor */}
         <TouchableOpacity
-          onPress={() => setActiveTab('Eksplor')}
+          onPress={() => router.push('/explore' as any)}
           className="items-center justify-center gap-1"
         >
           <Feather
@@ -250,7 +250,7 @@ export default function Home() {
 
         {/* Tab Progres */}
         <TouchableOpacity
-          onPress={() => setActiveTab('Progres')}
+          onPress={() => router.push('/progress' as any)}
           className="items-center justify-center gap-1"
         >
           <Feather

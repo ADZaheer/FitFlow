@@ -18,14 +18,8 @@ export default function Profile() {
   const [pengingatAir, setPengingatAir] = useState(true);
 
   const handleLogout = () => {
-    Alert.alert('Keluar Akun', 'Apakah kamu yakin ingin keluar dari aplikasi?', [
-      { text: 'Batal', style: 'cancel' },
-      {
-        text: 'Keluar',
-        style: 'destructive',
-        onPress: () => router.replace('/' as any),
-      },
-    ]);
+    // langsung keluar dan kembali ke halaman login awal
+    router.replace('/' as any);
   };
 
   return (
